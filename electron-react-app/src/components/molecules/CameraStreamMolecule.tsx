@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '../../store';
+import { CameraOff } from 'lucide-react';
 
 interface CameraStreamMoleculeProps {
   streamField: 'leftEye' | 'rightEye';
@@ -13,12 +14,12 @@ const CameraStreamMolecule: React.FC<CameraStreamMoleculeProps> = ({ streamField
   const cameraData = useSelector((state: RootState) => state.status.imageData[streamField]);
 
   return (
-    <div className="camera-container camera-sized">
+    <div className="">
       {cameraData.status === 'online' && cameraData.frame ? (
         <img src={cameraData.frame} alt={t('CameraStream.alt')} />
       ) : (
-        <div className="camera-sized flex-center camera-stream-offline-placeholder text-faded-color">
-          {t('CameraStream.offlinePlaceholder')}
+        <div>
+          <CameraOff/>
         </div>
       )}
     </div>

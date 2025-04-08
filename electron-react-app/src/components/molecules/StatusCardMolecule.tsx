@@ -26,6 +26,9 @@ const StatusCardMolecule: React.FC<StatusCardMoleculeProps> = ({
   stateLabels,
 }) => {
 
+  // SOO MANY FUCKING ABSTRACTIONS. why, you're not reusing these anyways. 
+  // btw, i always swear when reading code, including my own lol. don't mind me.
+
   // Determine which status text to display
   const statusText =
     status === 'good'

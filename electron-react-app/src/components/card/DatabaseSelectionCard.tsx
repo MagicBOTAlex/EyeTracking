@@ -22,7 +22,7 @@ const DatabaseSelectionCard: React.FC<DatabaseSelectionCardProps> = ({
 
   return (
     <div className="card mb-1">
-      <div className="card-header text-header-color text-header">
+      <div className="">
         <span className="status-title">{t("DatabasePage.databaseSelectionTitle")}</span>
       </div>
       <div className="text-normal text-standard-color">

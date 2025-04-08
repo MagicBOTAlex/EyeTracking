@@ -11,9 +11,6 @@ const HeadsetTrackingCard: React.FC = () => {
 
   return (
     <div className="card" title={t('HeadsetTrackingCard.title')}>
-      <div className="card-header text-header-color text-header">
-        <span className="status-title">{t('HeadsetTrackingCard.heading')}</span>
-      </div>
       <HeadsetTrackingMolecule theta={theta} />
     </div>
   );

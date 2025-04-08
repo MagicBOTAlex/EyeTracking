@@ -9,7 +9,7 @@ const RecordTrainingDataCard: React.FC = () => {
 
   return (
     <div className="card flex-1">
-      <div className="card-header text-header-color text-header">
+      <div className="">
         <span className="status-title">{t("DatabasePage.trainingDataRecordingTitle")}</span>
       </div>
       <div className="text-normal text-standard-color text-left">

@@ -10,8 +10,8 @@ const ConfigurationSection: React.FC = () => {
 
   return (
     <div className="card">
-      <div className="card-header text-header-color text-header">
-        <h2 className="text-center">{t('ConfigurationSection.heading')}</h2>
+      <div className="">
+        <h2 className="text-lg font-semibold">{t('ConfigurationSection.heading')}</h2>
       </div>
       <div className="text-normal text-standard-color">
         <HeadsetPortMolecule />

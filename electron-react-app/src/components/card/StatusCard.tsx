@@ -63,7 +63,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
 
   return (
     <div
-      className={`card ${forcedClass} ${clickableClass}`}
+      className={`${forcedClass} ${clickableClass}`}
       style={cssVars}
       onClick={onForcedToggle}
       title={titleText}

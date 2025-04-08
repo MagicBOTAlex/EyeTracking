@@ -56,10 +56,10 @@ const Tabs: React.FC = ({  }) => {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col min-h-screen">
       {/* Navbar (Scuffed, but this codebase is already quite messy)*/}
-      <div className="flex bg-base-200">
-        <div className="bg-grid-300 border border-base-300">
+      <div className="flex bg-base-200 h-16">
+        <div className="bg-grid-300 border-r-2 border-base-100 border-dashed">
           <div className="w-16 h-16 p-1 fill-base-100 object-contain">
             <DeprivedLogo/>
           </div>
@@ -82,7 +82,7 @@ const Tabs: React.FC = ({  }) => {
 
         <button
           onClick={() => setIsSettingsOpen(true)}
-          className="text-superbig text-header-color text-bold"
+          className="cursor-pointer"
           style={{
             marginLeft: "auto",
             width: "70px",
@@ -97,9 +97,7 @@ const Tabs: React.FC = ({  }) => {
       
 
       {/* Tab Content */}
-      <div className="p-4">
-        {tabs[activeTabIndex]?.content}
-      </div>
+      {tabs[activeTabIndex]?.content}
 
       {/* Settings Dialog */}
       <SettingsDialogWithContent

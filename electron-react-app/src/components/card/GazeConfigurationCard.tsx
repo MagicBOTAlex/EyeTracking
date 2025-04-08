@@ -11,7 +11,7 @@ const GazeConfigurationCard: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div className="card flex-1">
-      <div className="card-header text-header-color text-header">
+      <div className="">
         <span>{t('TrackingConfigurationCard.header')}</span>
       </div>
       <div className="text-normal text-standard-color text-left">

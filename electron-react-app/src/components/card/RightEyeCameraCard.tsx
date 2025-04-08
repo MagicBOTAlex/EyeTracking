@@ -7,14 +7,7 @@ const RightEyeCameraCard: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="card">
-      <div className="card-header text-header-color text-header">
-        <span>{t('StatusPage.rightEyeCamera')}</span>
-      </div>
-      <div className="text-normal text-standard-color">
-        <CameraStream streamField="rightEye" />
-      </div>
-    </div>
+    <CameraStream streamField="rightEye" />
   );
 };
 

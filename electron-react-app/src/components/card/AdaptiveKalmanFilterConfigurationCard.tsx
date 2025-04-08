@@ -15,7 +15,7 @@ const KalmanFilterConfigCard: React.FC = () => {
 
   return (
     <div className="card">
-      <div className="card-header text-header-color text-header">
+      <div className="">
         <span className="status-title">{t('KalmanFilterConfigCard.header')}</span>
       </div>
       <div className="text-normal text-standard-color">

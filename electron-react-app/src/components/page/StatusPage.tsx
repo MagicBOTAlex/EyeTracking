@@ -17,20 +17,50 @@ import HeadsetTrackingCard from "../card/HeadsetTrackingCard";
 import LeftEyeCameraCard from "../card/LeftEyeCameraCard";
 import RightEyeCameraCard from "../card/RightEyeCameraCard";
 
+enum CardType {
+  Left = 'left',
+  Right = 'right',
+  Headset = 'headset',
+}
+
+const CardComponents: Record<CardType, [React.FC, React.FC]> = {
+  [CardType.Left]: [LeftEyeStatusCard, LeftEyeCameraCard],
+  [CardType.Right]: [RightEyeStatusCard, RightEyeCameraCard],
+  [CardType.Headset]: [ThetaStatusCard, HeadsetTrackingCard],
+};
+
 const StatusPage: React.FC = () => {
+
+
+
   return (
-    <div className="page-container">
-      <div className="grid grid-auto-fill-280 mb-1">
-        <LeftEyeStatusCard />
-        <RightEyeStatusCard />
-        <ThetaStatusCard />
+    <div className="flex flex-col flex-1">
+
+      {/* Sorry bro, but I an't touching alla dat react. ew. svelte is sooo much more pleasent to read */}
+      <div className="w-full flex justify-center p-8 ">
+        <div className="rounded-t-lg flex gap-2">
+
+          {Object.values(CardType).map((key) => {
+            const [Status, Camera] = CardComponents[key];
+            return <div>
+              {/* React is sooo cursed wtf */}
+              <div className="relative grid place-items-center w-full rounded-t-lg border-2 border-b-0 border-base-200">
+                <div className="relative w-48 h-48 rounded-t-lg bg-grid-100">
+                </div>
+                <div className="absolute flex justify-center items-center top-0 bottom-0 object-fit overflow-hidden rounded-lg">
+                  <Camera />
+                </div>
+              </div>
+              <div className="bg-base-200 rounded-b-lg">
+                {/* Again, I could make it prettier, but nah. React is soo unreadable compared to Svelte */}
+                <Status />
+              </div>
+            </div>;
+          })}
+        </div>
       </div>
-      <div className="grid grid-auto-fill-280 mb-1">
-        <LeftEyeCameraCard />
-        <RightEyeCameraCard />
-        <HeadsetTrackingCard />
-      </div>
-      <div className="text-normal text-standard-color">
+
+      <div className="bg-base-200 flex-1 p-4">
         <ConfigurationSection />
       </div>
     </div>

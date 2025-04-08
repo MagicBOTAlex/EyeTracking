@@ -21,6 +21,7 @@
  */
 
 import React from 'react';
+import { Dot } from 'lucide-react';
 
 export type StatusType = 'good' | 'bad' | 'forced';
 
@@ -41,21 +42,14 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
   statusText,
   tooltip,
 }) => {
-  const dotColorVar =
-    status === 'good'
-      ? 'var(--color-status-dot-good)'
-      : 'var(--color-status-dot-bad)';
-
-  const inlineStyles: React.CSSProperties = {
-    backgroundColor: dotColorVar,
-  };
 
   return (
-    <div className="flex-label" title={tooltip}>
-      <div className="indicator-dot mr-1" style={inlineStyles} />
-      <div className="flex-col">
-        <span className="text-header text-bold">{label}</span>
-        <span className="text-header">{statusText}</span>
+    <div className='p-2'>
+      <div className={`flex border-l-2 pl-2 ${status === 'good' ? "border-success" : "border-error"}`} title={tooltip}>
+        <div className="flex flex-col">
+          <span className="text-header text-bold">{label}</span>
+          <span className="text-header">{statusText}</span>
+        </div>
       </div>
     </div>
   );

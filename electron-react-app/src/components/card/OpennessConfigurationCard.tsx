@@ -8,7 +8,7 @@ const OpennessConfigurationCard: React.FC = () => {
 
   return (
     <div className="card">
-      <div className="card-header text-header-color text-header">
+      <div className="">
         {t('OpennessConfigurationCard.header')}
       </div>
       <div className="text-normal text-standard-color mb-p5">

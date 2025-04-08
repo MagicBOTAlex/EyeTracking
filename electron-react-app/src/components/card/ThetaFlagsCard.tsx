@@ -8,7 +8,7 @@ const ThetaFlagsCard: React.FC = () => {
 
   return (
     <div className="card">
-      <div className="card-header text-header-color text-header">
+      <div className="">
         <span className="status-title">{t('ThetaFlagsCard.header')}</span>
       </div>
       <ThetaFlagsMolecule />
