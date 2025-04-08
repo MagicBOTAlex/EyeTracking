@@ -58,22 +58,26 @@ const Tabs: React.FC = ({  }) => {
   return (
     <div className="flex flex-col h-full">
       {/* Navbar (Scuffed, but this codebase is already quite messy)*/}
-      <div className="flex">
-        <div>
-          <DeprivedLogo/>
+      <div className="flex bg-base-200">
+        <div className="bg-grid-300 border border-base-300">
+          <div className="w-16 h-16 p-1 fill-base-100 object-contain">
+            <DeprivedLogo/>
+          </div>
         </div>
 
         {/* Tab selection */}
-        <div role="tablist" className="tabs tabs-border">
-          {tabs.map((tab, index) => (
-              <button
-                key={index}
-                onClick={() => handleTabClick(index)}
-                className={`tab ${activeTabIndex === index ? "tab-active" : ""}`}
-              >
-                {tab.label}
-              </button>
-            ))}
+        <div className="flex flex-col justify-end">
+          <div role="tablist" className="tabs tabs-border tabs-lg">
+            {tabs.map((tab, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleTabClick(index)}
+                  className={`tab ${activeTabIndex === index ? "tab-active" : ""}`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+          </div>
         </div>
 
         <button
