@@ -36,44 +36,56 @@ const SettingsDialogWithContent: React.FC<SettingsDialogWithContentProps> = ({ i
 
   return (
     <SettingsDialog isOpen={isOpen} onClose={onClose}>
-      <div className="mb-1">
-        <h2>{t('SettingsDialogWithContent.settings')}</h2>
-        <p>{t('SettingsDialogWithContent.configureSettings')}</p>
-      </div>
-      <div className="card mb-1">
-        <label htmlFor="language-select" className="card-header text-header-color text-header">
-          {t('SettingsDialogWithContent.languageLabel')}
-        </label>
-        <select
-          id="language-select"
-          value={selectedLanguage}
-          onChange={handleLanguageChange}
-          style={{ backgroundColor: "var(--dialog-box-background)" }}
-        >
-          <option value="English">{t('SettingsDialogWithContent.optionEnglish')}</option>
-          <option value="Japanese">{t('SettingsDialogWithContent.optionJapanese')}</option>
-          <option value="German">{t('SettingsDialogWithContent.optionGerman')}</option>
-          <option value="French">{t('SettingsDialogWithContent.optionFrench')}</option>
-          <option value="Spanish">{t('SettingsDialogWithContent.optionSpanish')}</option>
-        </select>
-      </div>
-      <div className="card mb-1">
-        <label htmlFor="theme-select" className="card-header text-header-color text-header">
-          {t('SettingsDialogWithContent.themeLabel')}
-        </label>
-        <select
-          id="theme-select"
-          value={currentTheme}
-          onChange={handleThemeChange}
-          style={{ backgroundColor: "var(--dialog-box-background)" }}
-        >
-          <option value="dark">{t('SettingsDialogWithContent.optionDark')}</option>
-          <option value="ninaboo">{t('SettingsDialogWithContent.optionNinaboo')}</option>
-          <option value="trans">{t('SettingsDialogWithContent.optionTrans')}</option>
-        </select>
-        <div className="mt-1">
-        <BackgroundImageUrlTextMolecule/>
-      </div>
+      <div className="space-y-4">
+        {/* Header */}
+        <div>
+          <h2 className="text-xl font-bold">{t('SettingsDialogWithContent.settings')}</h2>
+          <p className="text-base">{t('SettingsDialogWithContent.configureSettings')}</p>
+        </div>
+
+        {/* Language Selection */}
+        <div className="card bg-base-100 shadow-md">
+          <div className="card-body p-4">
+            <label htmlFor="language-select" className="label">
+              <span className="label-text">{t('SettingsDialogWithContent.languageLabel')}</span>
+            </label>
+            <select
+              id="language-select"
+              value={selectedLanguage}
+              onChange={handleLanguageChange}
+              className="select select-bordered w-full"
+            >
+              <option value="English">{t('SettingsDialogWithContent.optionEnglish')}</option>
+              <option value="Japanese">{t('SettingsDialogWithContent.optionJapanese')}</option>
+              <option value="German">{t('SettingsDialogWithContent.optionGerman')}</option>
+              <option value="French">{t('SettingsDialogWithContent.optionFrench')}</option>
+              <option value="Spanish">{t('SettingsDialogWithContent.optionSpanish')}</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Theme Selection */}
+        <div className="card bg-base-100 shadow-md">
+          <div className="card-body p-4">
+            <label htmlFor="theme-select" className="label">
+              <span className="label-text">{t('SettingsDialogWithContent.themeLabel')}</span>
+            </label>
+            <select
+              id="theme-select"
+              value={currentTheme}
+              onChange={handleThemeChange}
+              className="select select-bordered w-full"
+            >
+              <option value="green">green</option>
+              <option value="netherrack">netherrack</option>
+              <option value="dark">dark</option>
+              <option value="pink">pink</option>
+            </select>
+            <div className="mt-4">
+              <BackgroundImageUrlTextMolecule />
+            </div>
+          </div>
+        </div>
       </div>
     </SettingsDialog>
   );

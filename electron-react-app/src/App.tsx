@@ -7,35 +7,15 @@
  * for navigation between various pages.
  */
 import React from "react";
-import { useTranslation } from "react-i18next";
-import Tabs from "./components/misc/Tabs";
-import StatusPage from "./components/page/StatusPage";
-import DatabasePage from "./components/page/DatabasePage";
-import TrackingPage from "./components/page/TrackingPage";
+import MainLayout from "./components/misc/MainLayout";
 import "./i18n";
 
 const App: React.FC = () => {
-  const { t } = useTranslation();
-
-  // Define navigation tabs with labels and corresponding page components.
-  const tabs = [
-    {
-      label: t("App.tabStatus"),
-      content: <StatusPage />
-    },
-    {
-      label: t("App.tabDatabase"),
-      content: <DatabasePage />
-    },
-    {
-      label: t("App.tabTracking"),
-      content: <TrackingPage />
-    }
-  ];
 
   return (
     <div className="text-font-normal application-background-color">
-      <Tabs tabs={tabs} />
+      {/* We don't have to over complicate this */}
+      <MainLayout/>
     </div>
   );
 };

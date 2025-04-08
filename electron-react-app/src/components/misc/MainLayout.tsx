@@ -3,14 +3,9 @@
 /**
  * Tabs Component
  *
- * This component renders a tabbed interface where each tab displays its corresponding content.
- * The active tab index is managed via Redux, allowing for centralized state management across the application.
- * A settings button is included in the tab header to open a settings dialog.
- *
- * Structure:
- * - Tab Header: Renders a button for each tab along with a settings button.
- * - Tab Content: Displays the content corresponding to the currently active tab.
- * - Settings Dialog: A modal dialog that opens to display application settings.
+ * This component renders a tabbed interface using daisyUI's tabs and Tailwind CSS.
+ * The active tab index is managed via Redux, allowing for centralized state management
+ * across the application. A settings button is included to open a settings dialog.
  *
  * Props:
  * @param {Tab[]} tabs - An array of tab objects, each containing a label and content.
@@ -23,19 +18,14 @@ import type { RootState } from "../../store";
 import { setActiveTabIndex } from "../../slices/configSlice";
 import SettingsDialogWithContent from "./SettingsDialogWithContent";
 
-interface Tab {
-  /** The text label for the tab. */
-  label: string;
-  /** The content to display when the tab is active. */
-  content: ReactNode;
-}
+import StatusPage from "../page/StatusPage";
+import DatabasePage from "../page/DatabasePage";
+import TrackingPage from "../page/TrackingPage";
 
-interface TabsProps {
-  /** An array of tab objects containing labels and content. */
-  tabs: Tab[];
-}
+// Shameless promotion
+import DeprivedLogo from '@images/DeprivedLogo.svg?react';
 
-const Tabs: React.FC<TabsProps> = ({ tabs }) => {
+const Tabs: React.FC = ({  }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -45,27 +35,47 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
   // Local state to control the visibility of the settings dialog.
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  const tabs = [
+    {
+      label: t("App.tabStatus"),
+      content: <StatusPage />
+    },
+    {
+      label: t("App.tabDatabase"),
+      content: <DatabasePage />
+    },
+    {
+      label: t("App.tabTracking"),
+      content: <TrackingPage />
+    }
+  ];
+
   // Update the active tab index in the Redux store when a tab is clicked.
   const handleTabClick = (index: number): void => {
     dispatch(setActiveTabIndex(index));
   };
 
   return (
-    <div className="flex-col" style={{ height: "100%" }}>
-      <div className="tab-header">
-        {tabs.map((tab, index) => (
-          <button
-            key={index}
-            className={
-              activeTabIndex === index
-                ? "active text-header text-header-color"
-                : "text-header text-header-color"
-            }
-            onClick={() => handleTabClick(index)}
-          >
-            {tab.label}
-          </button>
-        ))}
+    <div className="flex flex-col h-full">
+      {/* Navbar (Scuffed, but this codebase is already quite messy)*/}
+      <div className="flex">
+        <div>
+          <DeprivedLogo/>
+        </div>
+
+        {/* Tab selection */}
+        <div role="tablist" className="tabs tabs-border">
+          {tabs.map((tab, index) => (
+              <button
+                key={index}
+                onClick={() => handleTabClick(index)}
+                className={`tab ${activeTabIndex === index ? "tab-active" : ""}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+        </div>
+
         <button
           onClick={() => setIsSettingsOpen(true)}
           className="text-superbig text-header-color text-bold"
@@ -79,9 +89,15 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
           {t("Tabs.settings")}
         </button>
       </div>
-      <div className="tab-content">
+
+      
+
+      {/* Tab Content */}
+      <div className="p-4">
         {tabs[activeTabIndex]?.content}
       </div>
+
+      {/* Settings Dialog */}
       <SettingsDialogWithContent
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}

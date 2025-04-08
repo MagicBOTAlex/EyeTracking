@@ -3,8 +3,9 @@
 /**
  * The Settings Dialog and SettingsDialogWithContent together form the settings modal
  * dialog of the application. Inside there you can control the theme and language.
- * 
- * This component in particular handles the control flow of the dialog. The other the content.
+ *
+ * This component in particular handles the control flow of the dialog.
+ * The other component is responsible for the actual content.
  */
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
@@ -39,8 +40,8 @@ const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose, childr
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
-    <div className="dialog-backdrop">
-      <div ref={dialogRef} className="dialog-container text-standard-color text-font-normal">
+    <div className="modal modal-open">
+      <div ref={dialogRef} className="modal-box">
         {children || <p>{t('SettingsDialog.settings')}</p>}
       </div>
     </div>,

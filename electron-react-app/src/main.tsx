@@ -154,6 +154,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Initializer>
           <ThemeProvider>
             <App />
+            
           </ThemeProvider>
         </Initializer>
       </PersistGate>
