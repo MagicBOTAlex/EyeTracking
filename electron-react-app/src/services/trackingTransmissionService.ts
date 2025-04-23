@@ -12,8 +12,8 @@
  */
 
 import store from '../store';
-import { EyeSelectionUtils } from '../utilities/eyeSelectionUtils';
-import { EqualityUtils } from '../utilities/equalityUtils';
+import { EyeSelectionUtils } from '../utilities/EyeSelectionUtils';
+import { EqualityUtils } from '../utilities/EqualityUtils';
 import { OscSenderUtils } from '../utilities/OscSenderUtils';
 
 /* -------------------------------------------------------------------
