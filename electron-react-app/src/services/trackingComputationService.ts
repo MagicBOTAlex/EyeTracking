@@ -103,6 +103,8 @@ async function loadAndPreprocessImage(
  * using the appropriate models. Finally, it disposes of any created tensors and signals the transmission
  * service to send out computed tracking data.
  */
+
+let isModelsLoaded = false;
 async function runTracking() {
   if (ongoingTracking) {
     return;
@@ -122,18 +124,20 @@ async function runTracking() {
   } = state.config;
 
   // Reload models if the model folder configuration has changed.
-  if (modelFile && modelFile !== currentModelFolder) {
+  if (!isModelsLoaded) {
     NormalizationUtils.resetNormalization();
     try {
+      console.log('Starting loading model');
       await Promise.all([
-        combinedThetaModel.loadModel(`${modelFile}\\combined_pitchyaw`),
-        combinedOpennessModel.loadModel(`${modelFile}\\combined_openness`),
-        rightThetaModel.loadModel(`${modelFile}\\right_pitchyaw`),
-        rightOpennessModel.loadModel(`${modelFile}\\right_openness`),
-        leftThetaModel.loadModel(`${modelFile}\\left_pitchyaw`),
-        leftOpennessModel.loadModel(`${modelFile}\\left_openness`)
+        combinedThetaModel.loadModel(`combined_pitchyaw`),
+        combinedOpennessModel.loadModel(`combined_openness`),
+        rightThetaModel.loadModel(`right_pitchyaw`),
+        rightOpennessModel.loadModel(`right_openness`),
+        leftThetaModel.loadModel(`left_pitchyaw`),
+        leftOpennessModel.loadModel(`left_openness`)
       ]);
       console.log('All tracking models loaded.');
+      isModelsLoaded = true;
     } catch (err) {
       console.error('Error loading tracking models:', err);
     }
@@ -153,10 +157,7 @@ async function runTracking() {
   // Check conditions for processing frames based on status, timestamps, and frame data.
   if (leftEye.status === 'online' && rightEye.status === 'online') {
     if (
-      leftEye.timestamp && rightEye.timestamp && // Timestamps exist
-      (now - previousLeftTimestamp >= trackingRate && now - previousRightTimestamp >= trackingRate) && // Enough time has passed
-      leftEye.frame.trim() !== '' && rightEye.frame.trim() !== '' && // Valid frame data exists
-      (leftEye.timestamp !== previousLeftTimestamp || rightEye.timestamp !== previousRightTimestamp) // At least one eye updated
+      leftEye.frame.trim() !== '' && rightEye.frame.trim() !== '' // Valid frame data exists
     ) {
       if (syncedEyeUpdates) {
         // Process only if both eyes have fresh updates.
@@ -289,5 +290,6 @@ async function runTracking() {
 export function startTrackingComputation() {
   store.subscribe(() => {
     runTracking();
+    console.log("frame" + Date.now())
   });
 }

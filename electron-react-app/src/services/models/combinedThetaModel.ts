@@ -31,9 +31,8 @@ const MODEL_ID = 'combinedTheta'; // Unique identifier for this model's filters
  */
 export async function loadModel(modelFolderPath: string): Promise<void> {
   try {
-    currentModel = await tf.loadLayersModel(
-      fileSystemIOHandler(`${modelFolderPath}\\model.json`)
-    );
+    const url = `http://127.0.0.1:4041/models/combined_pitchyaw/model.json`;
+    currentModel = await tf.loadLayersModel(url);
     console.log('CombinedTheta model loaded from', modelFolderPath);
   } catch (err) {
     console.error('Error loading CombinedTheta model:', err);

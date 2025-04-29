@@ -125,6 +125,7 @@ const Initializer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   // Start each service if it hasn't been started yet.
   useEffect(() => {
+    console.log("Starting everything")
     if (!cameraServiceStarted.current) {
       startCameraService();
       cameraServiceStarted.current = true;

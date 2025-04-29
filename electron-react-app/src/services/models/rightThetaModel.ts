@@ -30,9 +30,8 @@ const MODEL_ID = 'rightTheta'; // Unique identifier for the right theta model's 
  */
 export async function loadModel(modelFolderPath: string): Promise<void> {
   try {
-    currentModel = await tf.loadLayersModel(
-      fileSystemIOHandler(`${modelFolderPath}\\model.json`)
-    );
+    const url = `http://127.0.0.1:4041/models/${modelFolderPath}/model.json`;
+currentModel = await tf.loadLayersModel(url);
     console.log('RightTheta model loaded from', modelFolderPath);
   } catch (err) {
     console.error('Error loading RightTheta model:', err);

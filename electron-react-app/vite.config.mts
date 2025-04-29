@@ -16,5 +16,8 @@ export default defineConfig({
       '@images': path.resolve(__dirname, 'src/images'),
     },
   },
+  server: {
+    port: 4040,
+  },
   plugins: [tailwindcss(), react(), svgr()]
 });

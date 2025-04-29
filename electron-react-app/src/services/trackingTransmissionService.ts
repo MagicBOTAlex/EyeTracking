@@ -150,6 +150,8 @@ export function startTrackingTransmission() {
   // 3. If no valid transmission mode is set, exit early.
   if (currentMode === 'none') return;
 
+  // console.log("Sending data to osc")
+
   // 4. Compute and compare tracking values, then send OSC messages accordingly.
   // --- NATIVE MODE ---
   if (currentMode === 'native') {

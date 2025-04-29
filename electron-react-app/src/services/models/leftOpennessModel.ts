@@ -30,9 +30,9 @@ const MODEL_ID = 'leftOpenness'; // Unique identifier for this model's openness 
  */
 export async function loadModel(modelFolderPath: string): Promise<void> {
   try {
-    currentModel = await tf.loadLayersModel(
-      fileSystemIOHandler(`${modelFolderPath}\\model.json`)
-    );
+    const url = `http://127.0.0.1:4041/models/${modelFolderPath}/model.json`;
+    console.log(url);
+    currentModel = await tf.loadLayersModel(url);
     console.log('LeftOpenness model loaded from', modelFolderPath);
   } catch (err) {
     console.error('Error loading LeftOpenness model:', err);

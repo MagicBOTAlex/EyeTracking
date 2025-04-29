@@ -33,19 +33,19 @@ function connectTheta() {
   // Check if theta is forced offline.
   const forcedOffline = store.getState().config.thetaForcedOffline;
   if (forcedOffline) {
-    console.log("Theta Service: Forced offline - not attempting to connect.");
+    // console.log("Theta Service: Forced offline - not attempting to connect.");
     return;
   }
   if (!currentHeadsetPort) {
-    console.warn("Theta Service: No headset port configured.");
+    // console.warn("Theta Service: No headset port configured.");
     return;
   }
   const wsUrl = `ws://127.0.0.1:${currentHeadsetPort}/theta`;
-  console.log(`Theta Service: Connecting to ${wsUrl}`);
+  // console.log(`Theta Service: Connecting to ${wsUrl}`);
   socket = new WebSocket(wsUrl);
 
   socket.onopen = () => {
-    console.log(`Theta Service: WebSocket connection opened on port ${currentHeadsetPort}`);
+    // console.log(`Theta Service: WebSocket connection opened on port ${currentHeadsetPort}`);
     store.dispatch(setThetaStatus('online'));
   };
 
@@ -73,33 +73,33 @@ function connectTheta() {
           })
         );
       } else {
-        console.warn("Theta Service: Received invalid theta data", data);
+        // console.warn("Theta Service: Received invalid theta data", data);
       }
     } catch (err) {
-      console.error("Theta Service: Error parsing theta data", err);
+      // console.error("Theta Service: Error parsing theta data", err);
     }
   };
 
   socket.onerror = (error) => {
-    console.error("Theta Service: WebSocket error:", error);
+    // console.error("Theta Service: WebSocket error:", error);
   };
 
   socket.onclose = (event) => {
-    console.log("Theta Service: WebSocket closed:", event);
+    // console.log("Theta Service: WebSocket closed:", event);
     store.dispatch(setThetaStatus('offline'));
     // Attempt to reconnect after 2 seconds if the headset port hasn't changed and theta is not forced offline.
     reconnectTimeout = setTimeout(() => {
       const configState = store.getState().config;
       if (configState.thetaForcedOffline) {
-        console.log("Theta Service: Forced offline - not reconnecting.");
+        // console.log("Theta Service: Forced offline - not reconnecting.");
         return;
       }
       const latestPort = configState.headsetPort;
       if (latestPort === currentHeadsetPort) {
-        console.log("Theta Service: Reconnecting...");
+        // console.log("Theta Service: Reconnecting...");
         connectTheta();
       } else {
-        console.log("Theta Service: Headset port changed, not reconnecting on old port.");
+        // console.log("Theta Service: Headset port changed, not reconnecting on old port.");
       }
     }, 2000);
   };
@@ -114,7 +114,7 @@ function connectTheta() {
  */
 export function startThetaService() {
   currentHeadsetPort = store.getState().config.headsetPort;
-  console.log("Theta Service: Starting with headsetPort:", currentHeadsetPort);
+  // console.log("Theta Service: Starting with headsetPort:", currentHeadsetPort);
   connectTheta();
 
   // Subscribe to configuration changes.
@@ -126,7 +126,7 @@ export function startThetaService() {
     // If forced offline is active, close any connection and clear reconnect timeout.
     if (forcedOffline) {
       if (socket) {
-        console.log("Theta Service: Forced offline - closing active connection.");
+        // console.log("Theta Service: Forced offline - closing active connection.");
         socket.close();
         socket = null;
       }
@@ -139,7 +139,7 @@ export function startThetaService() {
 
     // If forced offline is not active, handle headset port changes.
     if (newPort !== currentHeadsetPort) {
-      console.log(`Theta Service: Headset port changed from ${currentHeadsetPort} to ${newPort}. Restarting connection.`);
+      // console.log(`Theta Service: Headset port changed from ${currentHeadsetPort} to ${newPort}. Restarting connection.`);
       currentHeadsetPort = newPort;
       if (socket) {
         socket.close();

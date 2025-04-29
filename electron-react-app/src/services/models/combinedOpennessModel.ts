@@ -31,9 +31,8 @@ const MODEL_ID = 'combinedOpenness'; // Unique identifier for the combined openn
 export async function loadModel(modelFolderPath: string): Promise<void> {
   console.log("Folder Path = " + modelFolderPath);
   try {
-    currentModel = await tf.loadLayersModel(
-      fileSystemIOHandler(`${modelFolderPath}\\model.json`)
-    );
+    const url = `http://127.0.0.1:4041/models/${modelFolderPath}/model.json`;
+    currentModel = await tf.loadLayersModel(url);
     console.log('CombinedOpenness model loaded from', modelFolderPath);
   } catch (err) {
     console.error('Error loading CombinedOpenness model:', err);
